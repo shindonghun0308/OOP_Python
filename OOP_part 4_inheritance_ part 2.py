@@ -62,40 +62,14 @@ class Item:
 
 
     def __repr__(self): #authomatic method to show how instances will be "represented"
-        return f"Item({self.name}, {self.price}, {self.quantity})"
+        ## old ver ## return f"Item({self.name}, {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}({self.name}, {self.price}, {self.quantity})"
+        # it is a way to access to name of the class from instance
+
 
 class Phone(Item): # "inheriting" the methods inside the parent class to child class,
                     # class Phone: "child class"
                     # class Item: "parent class"
-    all = []
-
-    # def __init__(self,
-    #              name: str,
-    #              price: float,
-    #              quantity=0,
-    #              broken_phones=0):  # this occurs automatically during instantiation/ constructor
-    #     # name only accepts str,
-    #     # quantity: only accepts int cuz default value is int
-    #
-    #     # Run validations to the received arguments/ "conditionals for arguments"
-    #     assert price >= 0, f"Price {price} is not greater than zero!"
-    #     assert quantity >= 0, f"Quantity {quantity} is not greater than zero!"
-    #     assert broken_phones >= 0, f"Broken Phones {quantity} is not greater than zero!"
-    #
-    #     # Assign to self object/ instantiation attribute
-    #     self.name = name  # assigning an attribute to each instance that is created
-    #     self.price = price  # assigning an attribute like this doesnt mean that they cannot be added for specific instances
-    #     self.quantity = quantity
-    #     self.broken_phones = broken_phones
-    #
-    #     # Actions to execute
-    #     Phone.all.append(self)  # Item is the "class", self here is the "instance"
-
-    ############## This works but unnecessary, inheritance of parent attributes can be
-            ####### done using "super"
-
-# do this instead
-
     def __init__(self,
                  name: str,
                  price: float,
@@ -114,8 +88,6 @@ class Phone(Item): # "inheriting" the methods inside the parent class to child c
         # Assign to self object/ instantiation attribute
         self.broken_phones = broken_phones
 
-        # Actions to execute
-        Phone.all.append(self)  # Item is the "class", self here is the "instance"
     pass
 
 
@@ -130,5 +102,7 @@ class Phone(Item): # "inheriting" the methods inside the parent class to child c
 # phone2.broken_phones = 1
 
 phone1 = Phone("jscPhonev10", 500, 5)
-print(phone1.calculate_total_price()) # can use methods from parent classes
-phone2 = Phone("jscPhonev20", 700, 5)
+
+print(Item.all)
+print(Phone.all) #it shows that the [Item(jscPhonev10, 500, 5)], due to repr inline 65.
+# it works even though all is no longer in Phone class, due to inheritance
