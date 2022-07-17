@@ -82,4 +82,3 @@ class Item:
         ## old ver ## return f"Item({self.name}, {self.price}, {self.quantity})"
         return f"{self.__class__.__name__}({self.name}, {self.price}, {self.quantity})"
         # it is a way to access to name of the class from instance
-
