@@ -13,12 +13,29 @@ class Item:
         assert quantity >= 0, f"Quantity {quantity} is not greater than zero!"
 
         # Assign to self object/ instantiation attribute
-        self.name = name # assigning an attribute to each instance that is created
-        self.price = price #assigning an attribute like this doesnt mean that they cannot be added for specific instances
+        self.__name = name # take note of __ for read only
+        self.price = price
         self.quantity = quantity
 
         #Actions to execute
         Item.all.append(self) #Item is the "class", self here is the "instance"
+
+    @property # helps to "get" the read-only attribut, name
+    # Property Decorator = Read-Only Attribute (unedittable)
+    def name(self):
+        # can write function like
+        # print("you are trying to GET"
+        return self.__name # take note of __
+
+    @name.setter #still want to set even though it is read only
+    def name(self, value):
+        # can write function like
+        # print("you are trying to SET")
+        # or
+        if len(value) > 10:
+            raise Exception("The name is too long!")
+        else:
+            self.__name = value
 
     # def calculate_total_price(self, x, y):
     #     return x*y
@@ -65,3 +82,4 @@ class Item:
         ## old ver ## return f"Item({self.name}, {self.price}, {self.quantity})"
         return f"{self.__class__.__name__}({self.name}, {self.price}, {self.quantity})"
         # it is a way to access to name of the class from instance
+
